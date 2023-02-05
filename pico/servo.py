@@ -12,7 +12,7 @@ class Servo:
  
     """
  
-    def __init__(self, pin: int or Pin or PWM, minVal=2500, maxVal=7500):
+    def __init__(self, pin: int or Pin or PWM, minVal=3275, maxVal=6550):
         """ Creates a new Servo Object.
  
         args:

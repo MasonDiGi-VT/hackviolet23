@@ -9,15 +9,16 @@ def servo_Map(x, in_min, in_max, out_min, out_max):
 def servo_Angle(angle):
     if angle < 0:
         angle = 0
-    if angle > 90:
-        angle = 90
-    s1.goto(round(servo_Map(angle,0,90,0,1024))) # Convert range value to angle value
+    if angle > 180:
+        angle = 180
+    s1.goto(round(servo_Map(angle,0,180,0,1024))) # Convert range value to angle value
     
 if __name__ == '__main__':
-    #servo_Angle(90)
-    while True:
+    servo_Angle(140);
+
+    while False:
         print("Turn left ...")
-        for i in range(30,90,10):
+        for i in range(90,150,10):
             servo_Angle(i)
             utime.sleep(0.2)
         print("Turn right ...")
