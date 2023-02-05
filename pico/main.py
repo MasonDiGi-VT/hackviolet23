@@ -17,14 +17,14 @@ account_sid = 'AC71aad870e880b93b2e6edb0a45f85109'
 auth_token = '88eb7a1482ee5a7e555c1019ac2d84c0'
 client = Client(account_sid, auth_token)
 def send(text):
-  #message = client.create(
-  #                   body=text,
-  #                   from_='+18333130978',
-  #                   to='+19088093670'
-  #               )
+  message = client.create(
+                     body=text,
+                     from_='+18333130978',
+                     to='+19088093670'
+                 )
 
-#   print(message.text)
-    print(text)
+   print(message.text)
+    #print(text)
 
 
 def getButton():
@@ -56,9 +56,9 @@ def PT():
             send("you missed your birth control today, please try not to miss it tommorow")
         buttonPressed = False
     for i in range(6):
-        timer = Timer(period=2000*i, mode=Timer.ONE_SHOT, callback=lambda t: pillTimer())
+        timer = Timer(period=30*60*i, mode=Timer.ONE_SHOT, callback=lambda t: pillTimer())
     
-    timer = Timer(period=2000*6, mode=Timer.ONE_SHOT, callback=lambda t: missed())
+    timer = Timer(period=30*60*6, mode=Timer.ONE_SHOT, callback=lambda t: missed())
 
 
 def setupLoop(lcd):
