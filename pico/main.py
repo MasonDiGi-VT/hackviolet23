@@ -16,6 +16,8 @@ from twilio import TwilioSMS as Client
 account_sid = 'AC71aad870e880b93b2e6edb0a45f85109'
 auth_token = '88eb7a1482ee5a7e555c1019ac2d84c0'
 client = Client(account_sid, auth_token)
+
+# Sends a text message
 def send(text):
   message = client.create(
                      body=text,
@@ -27,10 +29,12 @@ def send(text):
     #print(text)
 
 
+# Not used anymore, but gets the value of the dispense button
 def getButton():
     return Pin("GP5", mode=Pin.IN, pull=Pin.PULL_DOWN).value()
 
 
+# Called when the dispense button is pressed
 def callback(pin):
     global buttonPressed
     if (not inSetup):
@@ -42,12 +46,14 @@ def callback(pin):
 
     
     
+# Called every 30 minutes in the window
 def pillTimer():
     if not buttonPressed:
       send("make sure you take you birth control today")
       #print("make sure you take you birth control today")
         
 
+# Runs every 24 hours
 def PT():
     def missed():
         global buttonPressed
@@ -61,6 +67,7 @@ def PT():
     timer = Timer(period=30*60*6, mode=Timer.ONE_SHOT, callback=lambda t: missed())
 
 
+# Sets the time
 def setupLoop(lcd):
     global inSetup
     inSetup = True
@@ -87,6 +94,7 @@ def setupLoop(lcd):
         time.sleep(0.01)
 
 
+# Main function
 if __name__ == "__main__":
     #pill = 0
     #PT()
@@ -114,7 +122,7 @@ if __name__ == "__main__":
     waitTime = time.mktime(tuple(start))-time.mktime(now)
     if waitTime < 0:
         waitTime = time.mktime(tuple(start))+24*60*60 - time.mktime(now)
-    #sleep(waitTime)
+    sleep(waitTime)
     PT()
     timer = Timer(period=24*60*60*1000, mode=Timer.PERIODIC, callback=lambda t: PT())
     while True:
